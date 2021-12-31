@@ -9,6 +9,8 @@ on:
 jobs:
   docs:
     runs-on: ubuntu-latest
+    container:
+      image: hotelcalifornia/doxygen-base:1.0.0
     steps:
       - name: cancel previous runs
         uses: styfle/cancel-workflow-action@0.6.0
@@ -22,8 +24,7 @@ jobs:
           rm -rf html xml latex
           ./m.css/documentation/doxygen.py Doxyfile-mcss --debug
       - name: deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: html
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./html
