@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>hotel::coro::generator class | libhotel hotel's canonical library for PROS. the only things in it are extremely stupid experiments.</title>
+  <title>hotel::coro::generator class | libhotel hotel's canonical library for PROS</title>
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="shim.css" />
@@ -14,7 +14,7 @@
 <header><nav id="navigation">
   <div class="m-container">
     <div class="m-row">
-      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m"><img src="logo-doxygen.jpeg" alt="" />libhotel <span class="m-thin">hotel's canonical library for PROS. the only things in it are extremely stupid experiments.</span></a>
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m"><img src="logo-doxygen.jpeg" alt="" />libhotel <span class="m-thin">hotel's canonical library for PROS</span></a>
       <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
         <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
           <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
@@ -49,7 +49,18 @@
           <div class="m-doc-template">template&lt;class T&gt;</div>
           <span class="m-breadcrumb"><a href="namespacehotel.html">hotel</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacehotel_1_1coro.html">coro</a>::<wbr/></span>generator <span class="m-thin">class</span>
         </h1>
-        <p><span></span></p>
+        <p>generator object</p>
+        <table class="m-table m-fullwidth m-flat">
+          <thead>
+            <tr><th colspan="2">Template parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 1%">T</td>
+              <td>type of value the generator will emit</td>
+            </tr>
+          </tbody>
+        </table>
         <div class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -63,6 +74,20 @@
             </li>
           </ul>
         </div>
+<p>this object isn&#x27;t usually constructed directly. rather, instances of this class can be implicitly created from coroutine functions:</p><pre class="m-code"><span class="c1">// python-style `range` function, generates sequence of [start, end)</span>
+<span class="n">hotel</span><span class="o">::</span><span class="n">coro</span><span class="o">::</span><span class="n">generator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">range</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="kt">bool</span><span class="p">((</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">step</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iterations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">step</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">iterations</span><span class="o">++</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">len</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">current</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">step</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">co_yield</span><span class="w"> </span><span class="n">current</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// use</span>
+<span class="c1">// [0, 20)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="nl">i</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">))</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;i: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span></pre>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
@@ -100,23 +125,85 @@
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="a6c8a27a21a11f7e98c06bf9075b870b0">
-              <span class="m-doc-wrap-bumper">auto <a href="#a6c8a27a21a11f7e98c06bf9075b870b0" class="m-doc-self">next</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
-            </dt>
-            <dd><span></span></dd>
             <dt id="a8a460f0cc08511560c7b7566fdb23fa1">
               <span class="m-doc-wrap-bumper">auto <a href="#a8a460f0cc08511560c7b7566fdb23fa1" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classhotel_1_1coro_1_1generator.html" class="m-doc">generator</a> other) -&gt; <a href="classhotel_1_1coro_1_1generator.html" class="m-doc">generator</a>&amp; <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd><span></span></dd>
-            <dt id="aaf418cdcd0b0a8f7b308681c430580e1">
-              <span class="m-doc-wrap-bumper">auto <a href="#aaf418cdcd0b0a8f7b308681c430580e1" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classhotel_1_1coro_1_1generator.html#aa0cc38ac0a68715b25a007db595f7297" class="m-doc">iterator</a></span>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6c8a27a21a11f7e98c06bf9075b870b0" class="m-doc">next</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="aef9246476dc6f00e73dc3fd40ba45a6e">
-              <span class="m-doc-wrap-bumper">auto <a href="#aef9246476dc6f00e73dc3fd40ba45a6e" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) -&gt; generator_sentinel <span class="m-label m-flat m-success">noexcept</span></span>
+            <dd>advance the generator</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aaf418cdcd0b0a8f7b308681c430580e1" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classhotel_1_1coro_1_1generator.html#aa0cc38ac0a68715b25a007db595f7297" class="m-doc">iterator</a></span>
             </dt>
-            <dd><span></span></dd>
+            <dd>get an iterator pointing to the start of the sequence</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aef9246476dc6f00e73dc3fd40ba45a6e" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; generator_sentinel <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>marks the end of a generator for range-based iteration</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a6c8a27a21a11f7e98c06bf9075b870b0"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;class T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool hotel::<wbr />coro::<wbr />generator&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6c8a27a21a11f7e98c06bf9075b870b0" class="m-doc-self">next</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>advance the generator</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><code>false</code> if the generator is finished</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aaf418cdcd0b0a8f7b308681c430580e1"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;class T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classhotel_1_1coro_1_1generator.html#aa0cc38ac0a68715b25a007db595f7297" class="m-doc">iterator</a> hotel::<wbr />coro::<wbr />generator&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaf418cdcd0b0a8f7b308681c430580e1" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>get an iterator pointing to the start of the sequence</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>the iterator</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>typically this won&#x27;t be used directly. rather it is preferable to write code of the form</p><pre class="m-code"><span class="n">hotel</span><span class="o">::</span><span class="n">coro</span><span class="o">::</span><span class="n">generator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sequence</span><span class="p">();</span><span class="w"></span>
+
+<span class="c1">//...</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="nl">element</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">sequence</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span></pre>
+          </div></section>
+          <section class="m-doc-details" id="aef9246476dc6f00e73dc3fd40ba45a6e"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;class T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">generator_sentinel hotel::<wbr />coro::<wbr />generator&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aef9246476dc6f00e73dc3fd40ba45a6e" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>marks the end of a generator for range-based iteration</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>sentinel marking the end of the sequence</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>like with <code><a href="classhotel_1_1coro_1_1generator.html" class="m-doc">hotel::<wbr />coro::<wbr />generator</a>&lt;T&gt;::begin</code>, typically this isn&#x27;t used directly.</p>
+          </div></section>
         </section>
       </div>
     </div>
@@ -162,7 +249,7 @@
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>libhotel hotel's canonical library for PROS. the only things in it are extremely stupid experiments.. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.17 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>libhotel hotel's canonical library for PROS. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.17 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
