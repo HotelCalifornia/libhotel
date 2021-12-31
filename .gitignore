@@ -15,3 +15,5 @@ temp.errors
 *.ini
 .d/
 .cache
+
+lib*.zip
