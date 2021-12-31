@@ -9,8 +9,6 @@ on:
 jobs:
   docs:
     runs-on: ubuntu-latest
-    container:
-      image: okapilib/ubuntu-base:18.04
     steps:
       - name: cancel previous runs
         uses: styfle/cancel-workflow-action@0.6.0
