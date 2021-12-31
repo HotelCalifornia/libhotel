@@ -12,10 +12,6 @@ jobs:
     container:
       image: hotelcalifornia/doxygen-base:1.0.0
     steps:
-      - name: cancel previous runs
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
       - uses: actions/checkout@v2
         with:
           submodules: true
