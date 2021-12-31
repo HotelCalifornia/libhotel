@@ -173,7 +173,7 @@ namespace hotel {
     using motor_position_controller = pid_controller<Kp, Ki, Kd, std::int32_t, std::function<double()>>;
 
     /**
-     * typedef describing a velocity PID controller for a `pros::Motor` (feedback function e.g. `pros::Motor::get_actual_velocity)
+     * typedef describing a velocity PID controller for a `pros::Motor` (feedback function e.g. `pros::Motor::get_actual_velocity`)
      */
     template <Ratio Kp, Ratio Ki, Ratio Kd>
     using motor_velocity_controller = pid_controller<Kp, Ki, Kd, std::int32_t, std::function<double()>>;

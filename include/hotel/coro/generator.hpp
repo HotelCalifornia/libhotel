@@ -68,9 +68,7 @@ namespace hotel::coro {
                 using value_type = typename generator<T>::promise_type::value_type;
                 using pointer = typename generator<T>::promise_type::pointer_type;
 
-                generator_iterator()
-
-                noexcept : coro(nullptr) {};
+                generator_iterator() noexcept : coro(nullptr) {};
 
                 explicit generator_iterator(handle c) : coro(c) {};
 
@@ -112,31 +110,72 @@ namespace hotel::coro {
             };
         }
 
+        /**
+         * generator object
+         *
+         * this object isn't usually constructed directly. rather, instances of this class can be implicitly created from
+         * coroutine functions:
+         *
+         * ```{.cpp}
+         * // python-style `range` function, generates sequence of [start, end)
+         * hotel::coro::generator<int> range(int start, int end, int step = 1) {
+         *     int len = (end - start) / step + bool((end - start) % step);
+         *     int iterations = 0;
+         *     int current = start - step;
+         *     while (iterations++ < len) {
+         *         current += step;
+         *         co_yield current;
+         *     }
+         * }
+         *
+         * // use
+         * // [0, 20)
+         * for (auto i : range(0, 20)) std::cout << "i: " << i << std::endl;
+         * ```
+         *
+         * @tparam T type of value the generator will emit
+         */
         template<class T>
         class generator {
         public:
             using promise_type = generator_promise_type<T>;
             using iterator = generator_iterator<T>;
 
-            bool next() { return coro ? (coro.resume(), !coro.done()) : false; };
-
-            generator()
-
-            noexcept : coro(nullptr) {};
+            generator() noexcept : coro(nullptr) {};
 
             generator(generator const &) = delete;
 
             generator(generator &&rhs) : coro(rhs.coro) { rhs.coro = nullptr; };
 
-            generator &operator=(generator other)
-
-            noexcept {
+            generator &operator=(generator other) noexcept {
                 std::swap(coro, other.coro);
                 return *this;
             }
 
             ~generator() { if (coro) coro.destroy(); };
 
+            /**
+             * advance the generator
+             * @return `false` if the generator is finished
+             */
+            bool next() { return coro ? (coro.resume(), !coro.done()) : false; };
+
+            /**
+             * get an iterator pointing to the start of the sequence
+             *
+             * typically this won't be used directly. rather it is preferable to write code of the form
+             * ```{.cpp}
+             * hotel::coro::generator<int> sequence();
+             *
+             * //...
+             *
+             * for (auto& element : sequence()) {
+             *     std::cout << element << std::endl;
+             * }
+             * ```
+             *
+             * @return the iterator
+             */
             iterator begin() {
                 if (coro) {
                     coro.resume();
@@ -148,9 +187,14 @@ namespace hotel::coro {
                 return iterator{coro};
             };
 
-            generator_sentinel end()
-
-            noexcept {
+            /**
+             * marks the end of a generator for range-based iteration
+             *
+             * like with `hotel::coro::generator<T>::begin`, typically this isn't used directly.
+             *
+             * @return sentinel marking the end of the sequence
+             */
+            generator_sentinel end() noexcept {
                 return {};
             }
         private:
@@ -163,16 +207,13 @@ namespace hotel::coro {
         };
 
         namespace {
+            // define this here now that generator is a complete type
             template<class T>
-            auto generator_promise_type<T>::get_return_object()
-
-            noexcept {
-            using handle = std::coroutine_handle<generator_promise_type<T>>;
-            return generator {
-            handle::from_promise(*this)
-        };
-    };
-}
+            auto generator_promise_type<T>::get_return_object() noexcept {
+                using handle = std::coroutine_handle<generator_promise_type<T>>;
+                return generator{handle::from_promise(*this)};
+            };
+        }
 
 } // namespace hotel
 
