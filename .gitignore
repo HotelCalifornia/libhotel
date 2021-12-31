@@ -14,6 +14,11 @@ temp.log
 temp.errors
 *.ini
 .d/
-.cache
+*.cache
+
+# docs
+html
+latex
+xml
 
 lib*.zip

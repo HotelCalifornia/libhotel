@@ -10,7 +10,7 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     container:
-      image: hotelcalifornia/doxygen-base:1.0.1
+      image: hotelcalifornia/doxygen-base:1.0.2
     steps:
       - uses: actions/checkout@v2
         with:
