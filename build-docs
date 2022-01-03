@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm -rf html xml latex
+./m.css/documentation/doxygen.py Doxyfile-mcss --debug

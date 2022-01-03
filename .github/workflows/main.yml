@@ -16,9 +16,7 @@ jobs:
         with:
           submodules: true
       - name: build docs
-        run: |
-          rm -rf html xml latex
-          ./m.css/documentation/doxygen.py Doxyfile-mcss --debug
+        run: ./build-docs
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

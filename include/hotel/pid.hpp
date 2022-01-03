@@ -8,52 +8,34 @@
 
 #include "pros/rtos.hpp"
 
+#include "hotel/concepts.hpp"
 #include "hotel/coro/generator.hpp"
 
 #ifndef HOTEL_PID_HPP
 #define HOTEL_PID_HPP
 
-namespace {
-    template <class R, class Fn, class... Args>
-    concept invocable_r = std::is_invocable_r<R, Fn, Args...>::value;
-
-    template <class R, class Fn, class... Args>
-    concept InvocableR = invocable_r<R, Fn, Args...>;
-
-    template <class Fn, class... Args>
-    concept Predicate = std::predicate<Fn, Args...>;
-}
-
 namespace hotel {
-    template <class T>
-    concept is_ratio_like =
-        requires {
-            T::num;
-            T::den;
-        };
 
-    template <class T>
-    concept Ratio = is_ratio_like<T>;
-
-    template <class input_t, class F>
-    concept is_feedback_function = std::is_convertible<std::invoke_result_t<F>, input_t>::value;
-
-    template <class input_t, class F>
-    concept FeedbackFunction = is_feedback_function<input_t, F>;
-
-    template <class input_t, class F>
-    concept is_settled_function = std::predicate<F, input_t>;
-
-    template <class input_t, class F>
-    concept SettledFunction = is_settled_function<input_t, F>;
-
+    /**
+     * PID controller object
+     *
+     * @tparam Kp_t `std::ratio` representing the proportional gain
+     * @tparam Ki_t `std::ratio` representing the integral gain
+     * @tparam Kd_t `std::ratio` representing the derivative gain
+     * @tparam _output_t generator output type (should match whatever is being controlled)
+     * @tparam FeedbackFn type representing a feedback function (should have the form `_target_t(*)()`,
+     *                    `std::function<_target_t()>`, or equivalent)
+     * @tparam _target_t setpoint type (deduced from `FeedbackFn` return type)
+     * @tparam SettledFn type representing a function that evaluates whether the controller has settled (should have the
+     *                   form `bool(*)(_target_t)`, `std::function<bool(_target_t)>`, or equivalent)
+     */
     template <
-        Ratio Kp_t, Ratio Ki_t, Ratio Kd_t,
+        concepts::Ratio Kp_t, concepts::Ratio Ki_t, concepts::Ratio Kd_t,
         class _output_t,
         class FeedbackFn, class _target_t = typename std::result_of<FeedbackFn&()>::type,
         class SettledFn = std::function<bool(_target_t)>
     >
-        requires FeedbackFunction<_target_t, FeedbackFn> && SettledFunction<_target_t, SettledFn>
+        requires concepts::FeedbackFunction<_target_t, FeedbackFn> && concepts::SettledFunction<_target_t, SettledFn>
     class pid_controller {
         _target_t current_setpoint;
         _target_t error_accumulator;
@@ -169,25 +151,25 @@ namespace hotel {
     /**
      * typedef describing a position PID controller for a `pros::Motor` (feedback function e.g. `pros::Motor::get_position`)
      */
-    template <Ratio Kp, Ratio Ki, Ratio Kd>
+    template <concepts::Ratio Kp, concepts::Ratio Ki, concepts::Ratio Kd>
     using motor_position_controller = pid_controller<Kp, Ki, Kd, std::int32_t, std::function<double()>>;
 
     /**
      * typedef describing a velocity PID controller for a `pros::Motor` (feedback function e.g. `pros::Motor::get_actual_velocity`)
      */
-    template <Ratio Kp, Ratio Ki, Ratio Kd>
+    template <concepts::Ratio Kp, concepts::Ratio Ki, concepts::Ratio Kd>
     using motor_velocity_controller = pid_controller<Kp, Ki, Kd, std::int32_t, std::function<double()>>;
 
     /**
      * typedef describing a torque PID controller for a `pros::Motor` (feedback function e.g. `pros::Motor::get_current_draw`)
      */
-    template <Ratio Kp, Ratio Ki, Ratio Kd>
+    template <concepts::Ratio Kp, concepts::Ratio Ki, concepts::Ratio Kd>
     using motor_torque_controller = pid_controller<Kp, Ki, Kd, std::int32_t, std::function<std::int32_t()>>;
 
     /**
      * typedef describing a voltage PID controller for a `pros::Motor` (feedback function e.g. `pros::Motor::get_voltage`)
      */
-    template <Ratio Kp, Ratio Ki, Ratio Kd>
+    template <concepts::Ratio Kp, concepts::Ratio Ki, concepts::Ratio Kd>
     using motor_voltage_controller = pid_controller<Kp, Ki, Kd, std::int32_t, std::function<double()>>;
 }
 
