@@ -57,7 +57,6 @@
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#typedef-members">Typedefs</a></li>
-                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
@@ -65,6 +64,8 @@
         <section id="namespaces">
           <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
+            <dt>namespace <a href="namespacehotel_1_1concepts.html" class="m-doc">concepts</a></dt>
+            <dd><span></span></dd>
             <dt>namespace <a href="namespacehotel_1_1coro.html" class="m-doc">coro</a></dt>
             <dd><span></span></dd>
           </dl>
@@ -73,70 +74,35 @@
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;<a href="namespacehotel.html#acede4ff94c5cef0da7fbfa707673ac4f" class="m-doc">Ratio</a> Kp_t, <a href="namespacehotel.html#acede4ff94c5cef0da7fbfa707673ac4f" class="m-doc">Ratio</a> Ki_t, <a href="namespacehotel.html#acede4ff94c5cef0da7fbfa707673ac4f" class="m-doc">Ratio</a> Kd_t, class _output_t, class FeedbackFn, class _target_t = typename std::result_of&lt;FeedbackFn&amp;()&gt;::type, class SettledFn = std::function&lt;bool(_target_t)&gt;&gt;</div>
+              <div class="m-doc-template">template&lt;<a href="namespacehotel_1_1concepts.html#ab16fb67151d890b68025486310bb572f" class="m-doc">concepts::<wbr />Ratio</a> Kp_t, <a href="namespacehotel_1_1concepts.html#ab16fb67151d890b68025486310bb572f" class="m-doc">concepts::<wbr />Ratio</a> Ki_t, <a href="namespacehotel_1_1concepts.html#ab16fb67151d890b68025486310bb572f" class="m-doc">concepts::<wbr />Ratio</a> Kd_t, class _output_t, class FeedbackFn, class _target_t = typename std::result_of&lt;FeedbackFn&amp;()&gt;::type, class SettledFn = std::function&lt;bool(_target_t)&gt;&gt;</div>
               class <a href="classhotel_1_1pid__controller.html" class="m-doc">pid_controller</a>
             </dt>
-            <dd><span></span></dd>
+            <dd>PID controller object.</dd>
           </dl>
         </section>
         <section id="typedef-members">
           <h2><a href="#typedef-members">Typedefs</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;Ratio Kp, Ratio Ki, Ratio Kd&gt;</div>
+              <div class="m-doc-template">template&lt;concepts::Ratio Kp, concepts::Ratio Ki, concepts::Ratio Kd&gt;</div>
               using <a href="#a6f2d52c40443b498f7e4c102c5281a28" class="m-doc">motor_position_controller</a> = <a href="classhotel_1_1pid__controller.html" class="m-doc">pid_<wbr />controller</a>&lt;Kp, Ki, Kd, std::int32_t, std::function&lt;double()&gt;&gt;
             </dt>
             <dd>typedef describing a position PID controller for a <code>pros::Motor</code> (feedback function e.g.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;Ratio Kp, Ratio Ki, Ratio Kd&gt;</div>
+              <div class="m-doc-template">template&lt;concepts::Ratio Kp, concepts::Ratio Ki, concepts::Ratio Kd&gt;</div>
               using <a href="#aa638f9e5ec5ada0a1f1554ef30961945" class="m-doc">motor_velocity_controller</a> = <a href="classhotel_1_1pid__controller.html" class="m-doc">pid_<wbr />controller</a>&lt;Kp, Ki, Kd, std::int32_t, std::function&lt;double()&gt;&gt;
             </dt>
             <dd>typedef describing a velocity PID controller for a <code>pros::Motor</code> (feedback function e.g.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;Ratio Kp, Ratio Ki, Ratio Kd&gt;</div>
+              <div class="m-doc-template">template&lt;concepts::Ratio Kp, concepts::Ratio Ki, concepts::Ratio Kd&gt;</div>
               using <a href="#a596b0be82ca72191522990353cd5cfe6" class="m-doc">motor_torque_controller</a> = <a href="classhotel_1_1pid__controller.html" class="m-doc">pid_<wbr />controller</a>&lt;Kp, Ki, Kd, std::int32_t, std::function&lt;std::int32_t()&gt;&gt;
             </dt>
             <dd>typedef describing a torque PID controller for a <code>pros::Motor</code> (feedback function e.g.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;Ratio Kp, Ratio Ki, Ratio Kd&gt;</div>
+              <div class="m-doc-template">template&lt;concepts::Ratio Kp, concepts::Ratio Ki, concepts::Ratio Kd&gt;</div>
               using <a href="#a05360f98af3ec94a7be7bdf2e9e0f8d1" class="m-doc">motor_voltage_controller</a> = <a href="classhotel_1_1pid__controller.html" class="m-doc">pid_<wbr />controller</a>&lt;Kp, Ki, Kd, std::int32_t, std::function&lt;double()&gt;&gt;
             </dt>
             <dd>typedef describing a voltage PID controller for a <code>pros::Motor</code> (feedback function e.g.</dd>
-          </dl>
-        </section>
-        <section id="var-members">
-          <h2><a href="#var-members">Variables</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;class T&gt;</div>
-              concept <a href="#a3f8d4b8703f607e8cdd0e210492550ed" class="m-doc">is_ratio_like</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class T&gt;</div>
-              concept <a href="#acede4ff94c5cef0da7fbfa707673ac4f" class="m-doc">Ratio</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class input_t, class F&gt;</div>
-              concept <a href="#af995b5ec8ca71e16a93bef8ff4b9e5e1" class="m-doc">is_feedback_function</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class input_t, class F&gt;</div>
-              concept <a href="#a2c18bbdc8cf189b54ff6fc4f3f317029" class="m-doc">FeedbackFunction</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class input_t, class F&gt;</div>
-              concept <a href="#adfc2c0855abb29b29c04ff4dbf83bf7d" class="m-doc">is_settled_function</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              <div class="m-doc-template">template&lt;class input_t, class F&gt;</div>
-              concept <a href="#aa3db5edd0726f60d33de1d5d23d5314c" class="m-doc">SettledFunction</a>
-            </dt>
-            <dd><span></span></dd>
           </dl>
         </section>
         <section>
@@ -145,7 +111,7 @@
             <h3>
               <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="pid_8hpp.html">&lt;include/hotel/pid.hpp&gt;</a></div>
               <div class="m-doc-template">
-                template&lt;Ratio Kp, Ratio Ki, Ratio Kd&gt;
+                template&lt;concepts::Ratio Kp, concepts::Ratio Ki, concepts::Ratio Kd&gt;
               </div>
               using hotel::<wbr /><a href="#a6f2d52c40443b498f7e4c102c5281a28" class="m-doc-self">motor_position_controller</a> = <a href="classhotel_1_1pid__controller.html" class="m-doc">pid_<wbr />controller</a>&lt;Kp, Ki, Kd, std::int32_t, std::function&lt;double()&gt;&gt;
             </h3>
@@ -156,7 +122,7 @@
             <h3>
               <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="pid_8hpp.html">&lt;include/hotel/pid.hpp&gt;</a></div>
               <div class="m-doc-template">
-                template&lt;Ratio Kp, Ratio Ki, Ratio Kd&gt;
+                template&lt;concepts::Ratio Kp, concepts::Ratio Ki, concepts::Ratio Kd&gt;
               </div>
               using hotel::<wbr /><a href="#aa638f9e5ec5ada0a1f1554ef30961945" class="m-doc-self">motor_velocity_controller</a> = <a href="classhotel_1_1pid__controller.html" class="m-doc">pid_<wbr />controller</a>&lt;Kp, Ki, Kd, std::int32_t, std::function&lt;double()&gt;&gt;
             </h3>
@@ -167,7 +133,7 @@
             <h3>
               <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="pid_8hpp.html">&lt;include/hotel/pid.hpp&gt;</a></div>
               <div class="m-doc-template">
-                template&lt;Ratio Kp, Ratio Ki, Ratio Kd&gt;
+                template&lt;concepts::Ratio Kp, concepts::Ratio Ki, concepts::Ratio Kd&gt;
               </div>
               using hotel::<wbr /><a href="#a596b0be82ca72191522990353cd5cfe6" class="m-doc-self">motor_torque_controller</a> = <a href="classhotel_1_1pid__controller.html" class="m-doc">pid_<wbr />controller</a>&lt;Kp, Ki, Kd, std::int32_t, std::function&lt;std::int32_t()&gt;&gt;
             </h3>
@@ -178,75 +144,12 @@
             <h3>
               <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="pid_8hpp.html">&lt;include/hotel/pid.hpp&gt;</a></div>
               <div class="m-doc-template">
-                template&lt;Ratio Kp, Ratio Ki, Ratio Kd&gt;
+                template&lt;concepts::Ratio Kp, concepts::Ratio Ki, concepts::Ratio Kd&gt;
               </div>
               using hotel::<wbr /><a href="#a05360f98af3ec94a7be7bdf2e9e0f8d1" class="m-doc-self">motor_voltage_controller</a> = <a href="classhotel_1_1pid__controller.html" class="m-doc">pid_<wbr />controller</a>&lt;Kp, Ki, Kd, std::int32_t, std::function&lt;double()&gt;&gt;
             </h3>
             <p>typedef describing a voltage PID controller for a <code>pros::Motor</code> (feedback function e.g.</p>
 <p><code>pros::Motor::get_voltage</code>)</p>
-          </div></section>
-        </section>
-        <section>
-          <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="a3f8d4b8703f607e8cdd0e210492550ed"><div>
-            <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="pid_8hpp.html">&lt;include/hotel/pid.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;class T&gt;
-              </div>
-              concept hotel::<wbr /><a href="#a3f8d4b8703f607e8cdd0e210492550ed" class="m-doc-self">is_ratio_like</a>
-            </h3>
-            <p><span></span></p>
-          </div></section>
-          <section class="m-doc-details" id="acede4ff94c5cef0da7fbfa707673ac4f"><div>
-            <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="pid_8hpp.html">&lt;include/hotel/pid.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;class T&gt;
-              </div>
-              concept hotel::<wbr /><a href="#acede4ff94c5cef0da7fbfa707673ac4f" class="m-doc-self">Ratio</a>
-            </h3>
-            <p><span></span></p>
-          </div></section>
-          <section class="m-doc-details" id="af995b5ec8ca71e16a93bef8ff4b9e5e1"><div>
-            <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="pid_8hpp.html">&lt;include/hotel/pid.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;class input_t, class F&gt;
-              </div>
-              concept hotel::<wbr /><a href="#af995b5ec8ca71e16a93bef8ff4b9e5e1" class="m-doc-self">is_feedback_function</a>
-            </h3>
-            <p><span></span></p>
-          </div></section>
-          <section class="m-doc-details" id="a2c18bbdc8cf189b54ff6fc4f3f317029"><div>
-            <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="pid_8hpp.html">&lt;include/hotel/pid.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;class input_t, class F&gt;
-              </div>
-              concept hotel::<wbr /><a href="#a2c18bbdc8cf189b54ff6fc4f3f317029" class="m-doc-self">FeedbackFunction</a>
-            </h3>
-            <p><span></span></p>
-          </div></section>
-          <section class="m-doc-details" id="adfc2c0855abb29b29c04ff4dbf83bf7d"><div>
-            <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="pid_8hpp.html">&lt;include/hotel/pid.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;class input_t, class F&gt;
-              </div>
-              concept hotel::<wbr /><a href="#adfc2c0855abb29b29c04ff4dbf83bf7d" class="m-doc-self">is_settled_function</a>
-            </h3>
-            <p><span></span></p>
-          </div></section>
-          <section class="m-doc-details" id="aa3db5edd0726f60d33de1d5d23d5314c"><div>
-            <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="pid_8hpp.html">&lt;include/hotel/pid.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;class input_t, class F&gt;
-              </div>
-              concept hotel::<wbr /><a href="#aa3db5edd0726f60d33de1d5d23d5314c" class="m-doc-self">SettledFunction</a>
-            </h3>
-            <p><span></span></p>
           </div></section>
         </section>
       </div>
