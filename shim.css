@@ -1,3 +1,123 @@
 main p {
     text-indent: 0;
 }
+
+html {
+    background-color: #d52c00;
+}
+
+body > header > nav {
+    background-color: #ff9954;
+}
+
+body > header > nav #m-navbar-collapse li a:hover,
+body > header > nav #m-navbar-collapse li a:focus,
+body > header > nav #m-navbar-collapse li a:active {
+    border-color: #a40262;
+    background-color: #d52c00;
+    color: white;
+}
+
+body > header > nav a:hover,
+body > header > nav a:focus,
+body > header > nav a:active {
+    color: #d52c00;
+}
+
+body > footer > nav {
+    background-color: #ff9954;
+}
+
+body > footer > nav a:hover,
+body > footer > nav a:focus,
+body > footer > nav a:active {
+    color: #d52c00;
+}
+
+a {
+    color: #ff9954;
+}
+
+a:hover, a:focus, a:active {
+    color: #a94400;
+}
+
+ul.m-doc {
+    border-left-color: white;
+}
+
+table.m-table th, table.m-table td {
+    border-color: white;
+}
+
+article .m-row {
+    background-color: #a40262;
+}
+
+article h1 a,
+article > header h1,
+article > header h1 a,
+article section > h2,
+article section > h2 a,
+article section > h3,
+article section > h3 a,
+article section > h4,
+article section > h4 a,
+article section > h5,
+article section > h5 a,
+article section > h6,
+article section > h6 a {
+    color: #d261a3;
+}
+
+article h1 .m-breadcrumb a {
+    color: #ff9954;
+}
+
+.m-block.m-default {
+    border-left-color: white;
+}
+
+.m-block {
+    border-color: white;
+}
+
+pre, code {
+    background-color: #d52c00;
+}
+
+article section.m-doc-details > div > h3:first-child {
+    background-color: #d261a3;
+}
+
+.m-code .cp {
+    color: #a40262;
+}
+
+.m-code .cpf {
+    color: #d52c00;
+}
+
+a.m-doc-self,
+ul.m-doc li.m-doc-expansible > a:first-child:before,
+ul.m-doc li.m-doc-collapsible > a:first-child:before {
+    color: #d52c00;
+}
+
+.m-doc-template,
+dl.m-doc dd,
+ul.m-doc li > span.m-doc {
+    color: #ababab;
+}
+
+a.m-doc-self:hover,
+a.m-doc-self:focus,
+a.m-doc-self:active,
+ul.m-doc li.m-doc-expansible > a:first-child:hover::before,
+ul.m-doc li.m-doc-expansible > a:first-child:focus::before,
+ul.m-doc li.m-doc-expansible > a:first-child:active::before,
+ul.m-doc li.m-doc-collapsible > a:first-child:hover::before,
+ul.m-doc li.m-doc-collapsible > a:first-child:focus::before,
+ul.m-doc li.m-doc-collapsible > a:first-child:active::before {
+    color: #420f02;
+}
