@@ -2,7 +2,7 @@ version: "3.9"
 services:
   site:
     build: .
-    command: python3 -m http.server --directory /usr/src/docs/html 8000
+    command: ./build-docs && python3 -m http.server --directory /usr/src/docs/html 8000
     ports:
      - "8000:8000"
     volumes:

@@ -40,6 +40,33 @@ TEMPLATE_FILES=$(INCDIR)/hotel/**/*.hpp
 
 .DEFAULT_GOAL=quick
 
+DOCKER_USER:=hotelcalifornia
+DOCKER_CMD:=docker
+DOCKER_COMPOSE_CMD:=$(DOCKER_CMD)-compose
+
+DOCKER_IMAGE:=doxygen-base
+DOCKER_IMAGE_DIR:=$(ROOT)/$(DOCKER_IMAGE)
+DOCKER_IMAGE_VERSION:=1.0.3
+DOCKER_BUILD_CMD:=buildx build
+DOCKER_BUILD_ARGS:=--platform linux/amd64,linux/arm64 --push
+DOCKER_BUILD_TAG:=hotelcalifornia/$(DOCKER_IMAGE):$(DOCKER_IMAGE_VERSION)
+
+.PHONY: $(DOCKER_IMAGE) push-$(DOCKER_IMAGE) clean-docs site
+
+$(DOCKER_IMAGE):
+	@$(DOCKER) $(DOCKER_BUILD_CMD) $(DOCKER_BUILD_ARGS) -t $(DOCKER_BUILD_TAG) $(DOCKER_IMAGE_DIR)
+
+DOCS_OUTPUTS:=html latex xml
+
+clean-docs:
+	@rm -rf $(DOCS_OUTPUTS)
+
+site:
+	@$(DOCKER_COMPOSE_CMD) up -d
+
+$(ROOT)/html: site
+	@$(DOCKER_COMPOSE_CMD) exec site $(ROOT)/m.css/documentation/doxygen.py Doxyfile-mcss --debug
+
 ################################################################################
 ################################################################################
 ########## Nothing below this line should be edited by typical users ###########
